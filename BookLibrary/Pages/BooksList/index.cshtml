@@ -2,5 +2,17 @@
 @model BookLibrary.Pages.BooksList.IndexModel
 
 
-<h2>@Model.Data</h2>
-<h3> Hi There </h3>
+<br />
+<h2>Books List</h2>
+<hr />
+<br />
+<a asp-page="Create" class="btn btn-primary">Add New Book</a>
+
+@if (Model.books.Count() > 0)
+{
+    <div> Here are the available books</div>
+}
+else
+{
+    <div>No books in the list</div>
+}
