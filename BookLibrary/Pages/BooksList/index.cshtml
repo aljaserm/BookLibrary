@@ -6,13 +6,61 @@
 <h2>Books List</h2>
 <hr />
 <br />
-<a asp-page="Create" class="btn btn-primary">Add New Book</a>
 
-@if (Model.books.Count() > 0)
+@if (Model.msgData != null)
 {
-    <div> Here are the available books</div>
+    <div class="alert alert-info alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.msgData
+    </div>
 }
-else
-{
-    <div>No books in the list</div>
-}
+<a asp-page="Create" class="btn btn-primary">Add New Book</a>
+<form method="post">
+    @if (Model.books.Count() > 0)
+    {
+        <br />
+        <br />
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.books.FirstOrDefault().BookName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.books.FirstOrDefault().AuthorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.books.FirstOrDefault().ISBN)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var i in Model.books)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => i.BookName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => i.AuthorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => i.ISBN)
+                    </td>
+                    <td>
+                        <button asp-page-handler="Delete" asp-route-id="@i.Id" class="btn btn-danger btn-sm">Delete</button>
+                        <a asp-page="Edit" asp-route-id="@i.Id" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <br />
+    }
+    else
+    {
+        <div>No books in the list</div>
+    }
+</form>

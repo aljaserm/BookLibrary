@@ -10,6 +10,10 @@ namespace BookLibrary.Model
     {
         public int Id { get; set; }
         [Required]
+        [Display(Name ="Book Name")]
         public string BookName { get; set; }
+        [Display(Name = "Author Name")]
+        public string AuthorName { get; set; }
+        public string ISBN { get; set; }
     }
 }

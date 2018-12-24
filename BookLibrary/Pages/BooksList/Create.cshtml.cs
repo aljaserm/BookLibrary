@@ -18,6 +18,9 @@ namespace BookLibrary.Pages.BooksList
         [BindProperty]
         public Books books { get; set; }
 
+        [TempData]
+        public string msgData { get; set; }
+
         public void OnGet()
         {
 
@@ -31,6 +34,7 @@ namespace BookLibrary.Pages.BooksList
             }
             _db.Books.Add(books);
             await _db.SaveChangesAsync();
+            msgData = "Book is added successfully";
             return RedirectToPage("Index");
         }
     }
